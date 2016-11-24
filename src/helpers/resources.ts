@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueResource from 'vue-resource';
-import { router } from 'src/main';
+import { router } from '../main';
 
 const API_BASE = 'http://jsonplaceholder.typicode.com';
 

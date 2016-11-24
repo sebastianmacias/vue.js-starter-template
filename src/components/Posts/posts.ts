@@ -1,29 +1,29 @@
 import Vue from 'vue';
 
-import { postsResource } from 'src/helpers/resources';
-import { LoadingState } from 'src/main';
+// import { VueComponent, Prop } from 'vue-typescript'
+import template from './posts.html';
 
-import template from './post.html';
+import { LoadingState } from '../../main';
+import { postsResource } from '../../helpers/resources';
 
 export default Vue.extend({
   template,
 
   data() {
     return {
-      post: {},
+      posts: []
     };
   },
 
   created(){
-    this.fetchPost();
+    this.fetchPosts();
   },
 
   methods: {
-    fetchPost(){
-      const id = this.$route.params.id;
+    fetchPosts(){
       LoadingState.$emit('toggle', true);
-      return postsResource.get({ id }).then((response) => {
-        this.post = response.data;
+      return postsResource.get().then((response) => {
+        this.posts = response.data;
         LoadingState.$emit('toggle', false);
       }, (errorResponse) => {
         // Handle error...
@@ -32,4 +32,5 @@ export default Vue.extend({
       });
     }
   }
+
 });
